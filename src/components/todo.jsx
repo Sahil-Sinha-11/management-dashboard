@@ -20,28 +20,44 @@ function Todo() {
     };
 
     return (
-        <div className="max-w-4xl mx-auto p-6 bg-white rounded-lg shadow-lg mt-6">
-            <h2 className="text-3xl font-semibold text-center text-gray-700 mb-6">Your Todos</h2>
+        <div className="max-w-4xl mx-auto p-4 md:p-6 bg-white rounded-lg shadow-lg mt-6">
+            <h2 className="text-2xl md:text-3xl font-semibold text-center text-gray-700 mb-6">
+                Your Todos
+            </h2>
 
             <ul className="space-y-4">
                 {todos.map((todo) => (
                     <li
                         key={todo.id}
-                        className="flex justify-between items-center p-4 bg-gray-100 rounded-lg shadow-sm hover:bg-gray-200 transition"
+                        className="flex  flex-row md:justify-between items-center  p-4 bg-gray-100 rounded-lg shadow-sm hover:bg-gray-200 transition"
                     >
-                        <span className="text-lg text-gray-800">{todo.text}</span>
-                        <span className="text-lg text-gray-800">{todo.description}</span>
+                      
+                        <input
+                            type="checkbox"
+                            className="peer h-5 w-5 cursor-pointer transition-all appearance-none rounded shadow hover:shadow-md border border-slate-400 checked:bg-green-200 checked:border-slate-800 mb-3 md:mb-0"
+                        />
+                        
+                        
+                        <div className="flex-1 ml-4">
+                            <span className="block text-lg text-gray-800 font-medium">
+                                {todo.text}
+                            </span>
+                            <span className="block text-sm text-gray-600">
+                                {todo.description}
+                            </span>
+                        </div>
 
-                        <div>
+                     
+                        <div className="flex space-x-2 mt-3 md:mt-0">
                             <button
-                                className="ml-4 py-2 px-4 bg-blue-600 text-white font-semibold rounded-lg hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-blue-400"
+                                className="py-2 px-4 bg-blue-600 text-white font-semibold rounded-lg hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-blue-400 text-sm"
                                 onClick={() => openModal(todo.id)}
                             >
                                 Edit
                             </button>
 
                             <button
-                                className="ml-4 py-2 px-4 bg-red-600 text-white font-semibold rounded-lg hover:bg-red-700 focus:outline-none focus:ring-2 focus:ring-red-400"
+                                className="py-2 px-4 bg-red-600 text-white font-semibold rounded-lg hover:bg-red-700 focus:outline-none focus:ring-2 focus:ring-red-400 text-sm"
                                 onClick={() => dispatch(removeTodo(todo.id))}
                             >
                                 x
@@ -51,6 +67,7 @@ function Todo() {
                 ))}
             </ul>
 
+            
             {isModalOpen && selectedTodoId && (
                 <TodoItem id={selectedTodoId} closeModal={closeModal} />
             )}
